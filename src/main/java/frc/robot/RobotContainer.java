@@ -4,16 +4,16 @@
 
 package frc.robot;
 
-
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.*;
-import frc.robot.Constants.*;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import static edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.Constants.*;
+import static edu.wpi.first.wpilibj.XboxController.Button;
+import static frc.robot.subsystems.GearBox.Gear;
 
 
 public class RobotContainer {
@@ -41,7 +41,12 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kBumperRight.value)
       .whenPressed(() -> driveTrain.setMaxOutput(0.5))
       .whenReleased(() -> driveTrain.setMaxOutput(1));
-    }
+
+    new JoystickButton(driverController, Button.kX.value)
+    .whenPressed(() -> driveTrain.speedChange(Gear.LOW));
+    new JoystickButton(driverController, Button.kY.value)
+    .whenPressed(() -> driveTrain.speedChange(Gear.HIGH));
+  }
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous

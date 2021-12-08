@@ -1,27 +1,35 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import frc.robot.components.SparkMax;
+
+import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveTrain extends SubsystemBase {
 
   private final DifferentialDrive drive;
+  private final CANSparkMax leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor;
+  private final GearBox gearBox = new GearBox();
 
-  public DriveTrain () {
-    SpeedControllerGroup leftMotors = new SpeedControllerGroup(
-      new WPI_VictorSPX(DriveConstants.kLeftFrontMotorChannel),
-      new WPI_VictorSPX(DriveConstants.kLeftRearMotorChannel)
+  public DriveTrain() {
+    leftFrontMotor = SparkMax.factory(Motor.kLeftFront);
+    leftRearMotor = SparkMax.factory(Motor.kLeftRear);
+    rightFrontMotor = SparkMax.factory(Motor.kRightFront);
+    rightRearMotor = SparkMax.factory(Motor.kRightRear);
+
+    drive = new DifferentialDrive(
+      new SpeedControllerGroup(leftFrontMotor, leftRearMotor),
+      new SpeedControllerGroup(rightFrontMotor, rightRearMotor)
     );
-    SpeedControllerGroup rightMotors = new SpeedControllerGroup(
-      new WPI_VictorSPX(DriveConstants.kRightFrontMotorChannel),
-      new WPI_VictorSPX(DriveConstants.kRightRearMotorChannel)
-    );
-    this.drive = new DifferentialDrive(leftMotors, rightMotors);
   }
 
+  @Override
+  public void periodic() {
+    
+  }
 
   public void arcadeDrive(double fwd, double rot) {
     drive.arcadeDrive(fwd, rot);
@@ -31,4 +39,9 @@ public class DriveTrain extends SubsystemBase {
   public void setMaxOutput(double maxOutput) {
     drive.setMaxOutput(maxOutput);
   }
+
+  public void speedChange(GearBox.Gear gear) {
+    gearBox.shift(gear);
+  }
+
 }

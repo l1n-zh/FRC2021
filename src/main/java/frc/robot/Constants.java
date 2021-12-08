@@ -15,12 +15,28 @@ package frc.robot;
 
 public final class Constants {
 
-  public final class DriveConstants {
-    public static final int kLeftFrontMotorChannel = 3;
-    public static final int kLeftRearMotorChannel  = 4;
+  public static final class DriveConstants {
+    public enum Motor{
+      kLeftFront  (3),
+      kLeftRear   (4),
+      kRightFront (2),
+      kRightRear  (1);
 
-    public static final int kRightFrontMotorChannel = 2;
-    public static final int kRightRearMotorChannel  = 1;
+      public final int value;
+      Motor(int value) {
+        this.value = value;
+      }
+    }
+
+    public enum Solenoid{
+      kForward (5),
+      kReverse (6);
+
+      public final int value;
+      Solenoid(int value) {
+        this.value = value;
+      }
+    }
 
     }
 
