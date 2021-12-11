@@ -17,10 +17,10 @@ public final class Constants {
 
   public static final class DriveConstants {
     public enum Motor{
-      kLeftFront  (3),
-      kLeftRear   (4),
-      kRightFront (2),
-      kRightRear  (1);
+      kLeftFront  (34),
+      kLeftRear   (33),
+      kRightFront (36),
+      kRightRear  (31);
 
       public final int value;
       Motor(int value) {
@@ -28,12 +28,12 @@ public final class Constants {
       }
     }
 
-    public enum Solenoid{
-      kForward (5),
-      kReverse (6);
+    public enum SolenoidPort{
+      kForward (0),
+      kReverse (1);
 
       public final int value;
-      Solenoid(int value) {
+      SolenoidPort(int value) {
         this.value = value;
       }
     }

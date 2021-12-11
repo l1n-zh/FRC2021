@@ -27,11 +27,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
     driveTrain.setDefaultCommand(
       new RunCommand(
           () ->
-          driveTrain.arcadeDrive(
-                  driverController.getY(Hand.kLeft), driverController.getX(Hand.kRight)),
+          driveTrain.drive(
+                  driverController.getX(Hand.kLeft), driverController.getY(Hand.kLeft)),
                   driveTrain));
   }
   

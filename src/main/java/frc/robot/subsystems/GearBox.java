@@ -1,25 +1,30 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.Constants.DriveConstants.*;
-import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+import edu.wpi.first.wpilibj.Solenoid;
+import static frc.robot.Constants.DriveConstants.SolenoidPort.*;
 
 public class GearBox {
-    private final DoubleSolenoid solenoid;
+    private Solenoid rightSolenoid, leftSolenoid;
 
-    public enum Gear{
-        LOW,HIGH;
+    public enum Gear {
+        LOW(false, false),
+        HIGH(true, true);
+
+        public final boolean rStatus,lStatus;
+        Gear(boolean lStatus, boolean rStatus) {
+            this.lStatus = lStatus;
+            this.rStatus = rStatus;
+        }
     }
 
     public GearBox() {
-        solenoid = new DoubleSolenoid(Solenoid.kForward.value, Solenoid.kReverse.value);
+            leftSolenoid = new Solenoid(kForward.value);
+            rightSolenoid = new Solenoid(kReverse.value);
     }
 
-    public void shift (Gear gear) {
-        switch (gear) {
-          case LOW: solenoid.set(kOff);
-          case HIGH: solenoid.set(kForward); 
-        }
+    public void shift(Gear gear) {
+        leftSolenoid.set(gear.rStatus);
+        rightSolenoid.set(gear.lStatus);
     }
 
 }
