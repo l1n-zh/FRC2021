@@ -14,15 +14,15 @@ package frc.robot;
  */
 
 public final class Constants {
-
   public static final class DriveConstants {
-    public enum Motor{
+    public enum Motor {
       kLeftFront  (34),
       kLeftRear   (33),
       kRightFront (36),
       kRightRear  (31);
 
       public final int value;
+
       Motor(int value) {
         this.value = value;
       }
@@ -38,7 +38,11 @@ public final class Constants {
       }
     }
 
-    }
+    public static final int kGyroPort = 1;
+    public static final int kEncoderResolution = 42;
+    public static final int kWheelRadius = 1;
+
+  }
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;

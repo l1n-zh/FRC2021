@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.Constants.*;
 import static edu.wpi.first.wpilibj.XboxController.Button;
-import static frc.robot.subsystems.GearBox.Gear;
 
 
 public class RobotContainer {
@@ -37,17 +36,12 @@ public class RobotContainer {
   }
   
   private void configureButtonBindings() {
-
-    // Drive at half speed when the bumper is held
-    new JoystickButton(driverController, Button.kBumperRight.value)
-      .whenPressed(() -> driveTrain.setMaxOutput(0.5))
-      .whenReleased(() -> driveTrain.setMaxOutput(1));
-
-    new JoystickButton(driverController, Button.kX.value)
-    .whenPressed(() -> driveTrain.speedChange(Gear.LOW));
-    new JoystickButton(driverController, Button.kY.value)
-    .whenPressed(() -> driveTrain.speedChange(Gear.HIGH));
+  
+    new JoystickButton(driverController, Button.kStickLeft.value)
+    .whenPressed(() -> driveTrain.speedChange());
+    new JoystickButton(driverController, Button.kBumperRight.value);
   }
+
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
